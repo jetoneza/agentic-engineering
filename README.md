@@ -24,7 +24,17 @@ More tools and configurations will be added as I explore different agentic engin
 
 ## Repository Structure
 
-text agentic-engineering/ ├── README.md ├── plans/ ├── skills/ ├── setup/ ├── prompts/ ├── workflows/ ├── notes/ └── experiments/ 
+```text
+agentic-engineering/
+├── README.md
+├── plans/
+├── skills/
+├── setup/
+├── prompts/
+├── workflows/
+├── notes/
+└── experiments/
+```
 
 ### plans
 
