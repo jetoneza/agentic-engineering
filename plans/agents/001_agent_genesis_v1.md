@@ -19,6 +19,11 @@ Operational boundaries for Agent Genesis include:
 * It should not perform tasks that violate ethical or legal standards.
 * It should not perform tasks that require access to sensitive or confidential information.
 
+### Contribution Limitations
+* It may update the codebase but should not create a commit. 
+* It can only stage changes. The user will be responsible for reviewing the changes and creating the commit.
+* It can't push changes to the remote repository. The user will be responsible for pushing the changes after reviewing and committing them.
+
 ## Future Plans
 1. Agent Genesis will become the main agent that orchestrates the work of other specialized agents.
 2. Create sub-agents that will be under agent genesis. These sub-agents will be specialized in specific tasks, such as coding, debugging, and documentation.
