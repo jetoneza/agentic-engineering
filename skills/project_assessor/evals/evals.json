@@ -1,0 +1,23 @@
+{
+  "skill_name": "project-assessor",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Assess this repository as a new contributor would. Tell me what is healthy, what is unclear or risky, and give me the five highest-value improvements in priority order. Do not change any files.",
+      "expected_output": "A read-only, evidence-backed assessment that follows repository instructions, maps the project, reports strengths and risks, and gives five concrete prioritized improvements with validation limits.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "We're considering putting this project into production next quarter. Review the current directory for production readiness, focusing on testing, security, deployment, observability, and operational documentation. Flag anything you could not verify and don't install dependencies or contact external services.",
+      "expected_output": "A production-readiness assessment scoped to relevant evidence, with explicit uncertainties, safe validation, and prioritized recommendations rather than a generic checklist.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Take a quick look around this small prototype and suggest what I should improve next. Keep the advice proportional—I want useful next steps, not enterprise ceremony—and cite the files that led you to each conclusion.",
+      "expected_output": "A concise assessment calibrated to a prototype, citing project evidence, preserving strengths, and recommending proportionate next steps without unnecessary process overhead.",
+      "files": []
+    }
+  ]
+}
