@@ -1,0 +1,30 @@
+{
+  "skill_name": "project-improvement-planner",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Read the project assessment in this repository and help me decide what improvement to work on next. Don't implement anything yet.",
+      "expected_output": "The skill selects the appropriate assessment, extracts every prioritized improvement exactly once, and presents a numbered list with a short title, brief description, and assessment-grounded expected impact. It then asks the user to choose one item and stops without gathering implementation context or drafting a plan.",
+      "files": [
+        "project_assessment.md"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "There are an old project_assessment.md and newer dated assessment reports in the project root. Show me the recommendations from the report I should act on now, then let me choose one.",
+      "expected_output": "The skill chooses the report with the latest encoded date and highest collision suffix, identifies the chosen path, does not merge reports, lists every recommendation with title, description, and stated impact, and stops after asking for one selection.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "From the improvements you just showed me, I choose number 2, Make the roadmap stateful and outcome-based. Prepare the detailed implementation plan and save it as Markdown, but do not implement the improvement.",
+      "expected_output": "The skill re-reads the assessment and resolves recommendation 2, inspects only the repository instructions and project context needed for that recommendation, checks for drift, enters Plan mode when supported, and produces a detailed plan with outcome, evidence, scope, ordered file-specific steps, validation, acceptance criteria, risks, and open questions. It saves the complete plan to a non-destructive Markdown path under the existing plans directory, identifies that path in the response, and makes no implementation changes beyond creating the plan artifact.",
+      "files": [
+        "project_assessment.md",
+        "AGENTS.md",
+        "README.md",
+        "plans/initial_plan.md"
+      ]
+    }
+  ]
+}
