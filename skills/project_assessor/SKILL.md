@@ -91,6 +91,8 @@ Rank suggestions by impact, confidence, and effort. Keep the main list short eno
 
 Lead with risk-reducing or workflow-unblocking improvements. Avoid recommending broad rewrites when an incremental change addresses the evidence.
 
+Order the key findings by priority, then map them one-to-one to the prioritized improvements. Use the same number and the same concise title for each pair so a reader can move between the detailed evidence and the summary table without interpreting whether two differently worded items are related. Include every key finding in the table, and do not add a table entry that has no corresponding key finding.
+
 ## Report format
 
 Use this structure unless the user requests another format:
@@ -111,14 +113,15 @@ Use this structure unless the user requests another format:
 [Evidence-backed strengths worth preserving.]
 
 ## Key findings
-### [Severity: high | medium | low] [Finding]
+### 1. [Severity: high | medium | low] [Finding and improvement title]
 - Evidence:
 - Why it matters:
 - Recommendation:
 
 ## Prioritized improvements
-| Priority | Improvement | Impact | Effort | First step |
-| --- | --- | --- | --- | --- |
+| # | Priority | Improvement | Impact | Effort | First step |
+| --- | --- | --- | --- | --- | --- |
+| 1 | [Now, next, or later] | [Exact finding title] | [Impact] | [Small, medium, or large] | [First step] |
 
 ## Validation performed
 [Commands or checks and their outcomes.]
@@ -136,7 +139,7 @@ Before responding, confirm that:
 - every major criticism has repository evidence or is labeled as an inference;
 - strengths are included, not just defects;
 - suggestions are specific and prioritized rather than generic best practices;
+- every numbered key finding maps to a table row with the same number and exact title, with no unmatched findings or improvements;
 - commands and paths match the actual project;
 - no secret values or private data appear in the report;
 - the response clearly states validation limits.
-
