@@ -5,7 +5,7 @@ description: Inspect the current project or repository, produce an evidence-back
 
 # Project Assessor
 
-Assess the current project as it actually exists, then give practical feedback tied to evidence. Favor a useful decision aid over a generic checklist.
+Assess the current project as it actually exists, then give practical feedback tied to evidence. Produce a bounded decision aid for choosing what to improve next, not an exhaustive inventory or certification of every project defect.
 
 ## Operating principles
 
@@ -14,6 +14,7 @@ Assess the current project as it actually exists, then give practical feedback t
 - Protect secrets and privacy. Inspect filenames and configuration structure, but do not print credential values, private keys, tokens, or sensitive user data.
 - Separate observed facts from inferences. If evidence is incomplete, state what was not verified.
 - Calibrate depth to project size and the user's request. Sample large generated, vendored, fixture, lock, and data trees instead of exhausting context on them.
+- Use progressive discovery: map broadly first, then deepen inspection only where evidence could produce or materially change a prioritized finding.
 - Prefer recommendations that fit the project's maturity and stated goals. A small prototype does not need the process overhead of a mature production service.
 
 ## Assessment workflow
@@ -41,9 +42,22 @@ git status --short
 
 Adapt exclusions to the repository. Do not assume Git is present. Identify the major directories, entry points, manifests, dependency files, tests, automation, documentation, configuration, deployment artifacts, and generated or vendored content.
 
-For a large repository, inspect representative files from each important area and disclose the sampling boundary.
+For a large repository, inspect representative files from each important area and disclose the sampling boundary. Map an area from filenames and high-signal entry points before deciding whether its implementation needs deeper inspection.
 
-### 3. Infer the intended development workflow
+### 3. Control exploration depth
+
+Treat context as a limited assessment resource. Continue inspecting while new evidence could materially change:
+
+- whether an issue becomes a key finding;
+- a finding's conclusion, priority, or confidence;
+- the recommended next action; or
+- the assessment's coverage of a project-critical area.
+
+Stop when further inspection is likely to add examples without changing those decisions. Do not keep reading similar files merely to accumulate support for an already well-evidenced finding.
+
+Start with representative sampling, then expand only for a concrete reason such as contradictory evidence, a high-risk boundary, an unclear cross-cutting pattern, or a validation failure. Record what was sampled and what was not inspected so the report communicates the limits of its conclusions.
+
+### 4. Infer the intended development workflow
 
 Read the highest-signal files first:
 
@@ -55,7 +69,7 @@ Read the highest-signal files first:
 
 Determine how a contributor is expected to install, run, test, lint, build, deploy, and troubleshoot the project. Note contradictions between documentation, configuration, and implementation.
 
-### 4. Assess relevant dimensions
+### 5. Assess relevant dimensions
 
 Evaluate only dimensions supported by the project and available evidence:
 
@@ -72,15 +86,15 @@ Evaluate only dimensions supported by the project and available evidence:
 
 Do not award or subtract points merely because a technology or file is absent. Explain why an absence matters in this project's context.
 
-### 5. Verify high-value claims
+### 6. Verify high-value claims
 
 Run documented, safe, proportionate validation commands when they are available and within scope. Begin with non-mutating checks. Do not install dependencies, contact external systems, access production, or run destructive commands without explicit authorization.
 
 For each command, record whether it passed, failed, or could not be run. Distinguish project failures from missing local dependencies or environment limitations.
 
-### 6. Prioritize improvements
+### 7. Prioritize improvements
 
-Rank suggestions by impact, confidence, and effort. Keep the main list short enough to act on. Each recommendation should include:
+Rank suggestions by impact, confidence, and effort. By default, report no more than five key findings so the assessment remains actionable. Exceed five only when the user explicitly requests broader coverage and the additional findings are materially distinct and consequential. Each recommendation should include:
 
 - the observed issue or opportunity;
 - evidence with file paths and line numbers when practical;
@@ -93,7 +107,7 @@ Lead with risk-reducing or workflow-unblocking improvements. Avoid recommending 
 
 Order the key findings by priority, then map them one-to-one to the prioritized improvements. Use the same number and the same concise title for each pair so a reader can move between the detailed evidence and the summary table without interpreting whether two differently worded items are related. Include every key finding in the table, and do not add a table entry that has no corresponding key finding.
 
-### 7. Write the assessment artifact
+### 8. Write the assessment artifact
 
 Save the complete report as a Markdown file after the assessment is finalized:
 
@@ -152,6 +166,8 @@ Before responding, confirm that:
 - every major criticism has repository evidence or is labeled as an inference;
 - strengths are included, not just defects;
 - suggestions are specific and prioritized rather than generic best practices;
+- the default five-finding limit was respected, or the user's request for broader coverage is explicit;
+- exploration stopped at diminishing returns and did not accumulate redundant examples;
 - every numbered key finding maps to a table row with the same number and exact title, with no unmatched findings or improvements;
 - commands and paths match the actual project;
 - no secret values or private data appear in the report;
